@@ -4,7 +4,7 @@ namespace Exo3_PrixCommande
 {
     internal class Program
     {
-        //attribution de variables statiques
+        //création de variables statiques
         static readonly decimal TVA = 0.20m;
         
         static void Main(string[] args)
