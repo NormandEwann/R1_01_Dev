@@ -4,7 +4,7 @@
     {
         static void Main(string[] args)
         {
-            //définition de variables
+            //création de variables
             String nom;
             String prénom;
 
