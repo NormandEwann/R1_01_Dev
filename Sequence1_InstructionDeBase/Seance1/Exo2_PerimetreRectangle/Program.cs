@@ -9,7 +9,7 @@
             double hauteur;
             String unit;
 
-            //attribution des variables
+            //attribution de valeurs aux variables
             Console.WriteLine("CALCUL DU PERIMETRE D'UN RECTANGLE");
             Console.WriteLine("----------------------------------");
             Console.WriteLine("Unité de mesure (m, cm, mm...) :");
