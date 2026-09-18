@@ -4,7 +4,7 @@
     {
         static void Main(string[] args)
         {
-            //definition des variables
+            //création des variables
             double largeur;
             double hauteur;
             String unit;
