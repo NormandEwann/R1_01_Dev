@@ -4,12 +4,18 @@
     {
         static void Main(string[] args)
         {
+            //définition de variables
             String nom;
+            String prénom;
+
+            //attribution de valeurs aux variables
             Console.WriteLine("Nom:");
             nom = Console.ReadLine();
-            String prénom;
+            
             Console.WriteLine("Prenom:");
             prénom = Console.ReadLine();
+
+            //afficher le résultat
             Console.WriteLine("-----------");
             Console.WriteLine("Salut " + nom + " " + prénom + "!");
         }
