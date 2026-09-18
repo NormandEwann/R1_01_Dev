@@ -18,7 +18,7 @@ namespace Exo3_PrixCommande
             decimal prixTotal;
             int quantité;
 
-            //atribution des variables
+            //attribution de valeurs aux variables
             Console.WriteLine("CALCUL DE LA TAXE ET DU PRIX TOTAL");
             Console.WriteLine("----------------------------------");
             Console.WriteLine("Prix Hors Taxes :");
