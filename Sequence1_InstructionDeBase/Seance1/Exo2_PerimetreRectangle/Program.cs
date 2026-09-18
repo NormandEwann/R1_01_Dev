@@ -4,17 +4,24 @@
     {
         static void Main(string[] args)
         {
+            //definition des variables
             double largeur;
             double hauteur;
-            String Unit;
+            String unit;
+
+            //attribution des variables
             Console.WriteLine("CALCUL DU PERIMETRE D'UN RECTANGLE");
             Console.WriteLine("----------------------------------");
             Console.WriteLine("Unité de mesure (m, cm, mm...) :");
-            Unit = Console.ReadLine();
+            unit = Console.ReadLine();
+            
             Console.WriteLine("Largeur :");
             largeur = double.Parse(Console.ReadLine());
+            
             Console.WriteLine("Hauteur :");
             hauteur = double.Parse(Console.ReadLine());
+
+            //Afficher le résultat
             Console.WriteLine("Perimetre du rectangle : " + (hauteur + largeur)*2 + Unit);
         }
     }
