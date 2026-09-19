@@ -1,69 +1,51 @@
 ﻿using System.Text;
 
-namespace Exo5_Voyage
+namespace Exo3_TarificationAggressive
 {
     internal class Program
     {
-        static readonly decimal PLAZZA_SEM = 753m, PLAZZA_SUPP = 47m, RIVIERA_SEM = 784m, RIVIERA_SUPP = 44m;
-        static readonly decimal PLAZZA_O = 29m, PLAZZA_L = 33m, RIVIERA_O = 27m, RIVIERA_L = 30m;
+        //Meme exercice que le 2.
+        //Cependant je n'ai pas eu le temps de faire vérifier cet exercice par la prof. Donc prenez la suite avec des pincettes.
+        //Selon moi, c'est un problème de francais. Avant, on a demandé moins de 10, puis jusqu'a 49.
+        //Ici c'est jusqu'a 9, puis 40 de plus ! Donc 9, puis 49. Mais le prix est différent pour les 40 suivants, et pour les "autres"...
+
+        //Creation de vriables statiques
+        static readonly decimal PRIX_QT_9 = 149.99m, PRIX_QT_40 = 134.99m, PRIX_QT_AUTRES = 109.99m;
+        static readonly int QT_MINI = 9, QT_SUIVANTS = 40;
         static void Main(string[] args)
         {
+            //Ecnodage UTF8
             Console.OutputEncoding = Encoding.UTF8;
-            decimal prixHotel = 0m, prixVoiture = 0m, prixTotal = 0m;
 
-            Console.WriteLine("Nb de jours de voyage :");
-            if (!int.TryParse(Console.ReadLine(), out int nbJour) || nbJour < 7)
+            //Variables
+            decimal prix = 0m;
+            Console.WriteLine("Quantité ?");
+            string input = (Console.ReadLine());
+
+            //Test rapide de la validité de l'input. Si c'est un nombre, on le convertit en int. Sinon, on affiche un message d'erreur.
+
+            if (!int.TryParse(input, out int quantite) || quantite < 0)
             {
-                Console.WriteLine("Erreur : le nombre de jours doit être un entier d'au moins 7.");
+                Console.WriteLine("Veuillez choisir un nombre valide");
                 return;
             }
 
-            Console.WriteLine("Riviera (R) ou Plazza (P)?");
-            string hotel = Console.ReadLine();
-            if (hotel != "R" && hotel != "P")
+            //Conditionnel logique
+            else if (quantite <= QT_MINI)
             {
-                Console.WriteLine("Erreur : hotel invalide, veuillez entrer R ou P");
-                return;
+                prix = quantite * PRIX_QT_9;
             }
-
-            Console.WriteLine("Location de véhicule ?");
-            string vehicule = Console.ReadLine();
-            if (vehicule != "O" && vehicule != "N")
+            else if (quantite <= (QT_SUIVANTS + QT_MINI))
             {
-                Console.WriteLine("Erreur : entrée invalide, veuillez entrer O ou N");
-                return;
-            }
-
-            Console.WriteLine("Combien de jours ?");
-            if (!int.TryParse(Console.ReadLine(), out int jourVoiture) || jourVoiture < 0 || jourVoiture > nbJour)
-            {
-                Console.WriteLine("Erreur : nombre de jours de location invalide.");
-                return;
-            }
-
-            Console.WriteLine("Voiture ordinaire (O) ou luxe (L)?");
-            string typeVoiture = Console.ReadLine();
-            if (typeVoiture != "O" && typeVoiture != "L")
-            {
-                Console.WriteLine("Erreur : type invalide, veuillez entrer O ou L");
-                return;
-            }
-
-            if (hotel == "P")
-            {
-                prixHotel = nbJour > 7 ? (nbJour - 7) * PLAZZA_SUPP + PLAZZA_SEM : PLAZZA_SEM;
-                if (vehicule == "O")
-                    prixVoiture = (typeVoiture == "O" ? PLAZZA_O : PLAZZA_L) * jourVoiture;
+                prix = quantite * PRIX_QT_40;
             }
             else
             {
-                prixHotel = nbJour > 7 ? (nbJour - 7) * RIVIERA_SUPP + RIVIERA_SEM : RIVIERA_SEM;
-                if (vehicule == "O")
-                    prixVoiture = (typeVoiture == "O" ? RIVIERA_O : RIVIERA_L) * jourVoiture;
+                prix = quantite * PRIX_QT_AUTRES;
             }
 
-            prixTotal = prixHotel + prixVoiture;
-            Console.WriteLine($"Votre voyage vous coutera au total {prixTotal:C}, pour {prixHotel:C} d'hôtel et {prixVoiture:C} de location de voiture.");
+            //Afficher le resultat
+            Console.WriteLine($"Le tarif est de {prix:C}.");
         }
     }
 }
