@@ -4,14 +4,26 @@ namespace Exo5_Voyage
 {
     internal class Program
     {
+        //Creation des valeurs statiques
         static readonly double PLAZZA_SEM = 753, PLAZZA_SUPP = 47, RIVIERA_SEM = 784, RIVIERA_SUPP = 44;
         static readonly double PLAZZA_O = 29, PLAZZA_L = 33, RIVIERA_O = 27, RIVIERA_L = 30;
+
         static void Main(string[] args)
         {
+            //encodage en UTF8
             Console.OutputEncoding = Encoding.UTF8;
+
+            //Variables
             double prixHotel = 0, prixVoiture = 0, prixTotal = 0;
 
             //QUESTIONS ----------------------------------------------------------------------------------------------------------------------------------
+
+
+            //On poses nos questions et on vérifie si les réponses sont valides, sinon on affiche un message d'erreur et on quitte le programme
+            //Si nbJour est bien un nombre et = ou supérieur à 7
+            //Si hotel est bien R ou P
+            //Si vehicule est bien O ou N
+            //Et si jourVoiture est bien un nombre et inférieur ou égal à nbJour (en gros pas plus de jours de location que de jours de voyage)
 
             Console.WriteLine("Nb de jours de voyage :");
             if (!int.TryParse(Console.ReadLine(), out int nbJour))
@@ -65,6 +77,10 @@ namespace Exo5_Voyage
 
             //Conditionel------------------------------------------------------------------------------------------------------------------------------
 
+            //Une fois nos questions posées, on s'occupe du conditionnel
+
+            //Si l'hotel est le Plazza, on calcule le prix de l'hotel et de la voiture selon les conditions, sinon on fait pareil pour le Riviera
+
             if (hotel  == "P")
             {
                 if (nbJour > 7)
@@ -110,10 +126,13 @@ namespace Exo5_Voyage
                 }
             }
 
-            prixTotal = (prixHotel + prixVoiture);
+            //On calcule le prix total du voyage en additionnant le prix de l'hotel et de la voiture, puis on affiche le résultat avec un format monétaire
 
+            prixTotal = (prixHotel + prixVoiture);
             Console.WriteLine($"Votre voyage vous coutera au total {prixTotal:C}, pour {prixHotel:C} d'hôtel et {prixVoiture:C} de location de voiture.");
 
+            //Rappel, le fromat monétaire est défini par la culture de l'ordinateur, donc si vous êtes en Suisse, le format sera CHF, si vous êtes en France, le format sera €, etc.
+            //Il s'écrit avec un entête "$" sur le string, puis "{valeur:C}" dans le string pour indiquer le format monétaire.
 
         }
     }
