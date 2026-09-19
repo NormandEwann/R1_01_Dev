@@ -5,6 +5,12 @@ namespace Exo1_Soldes
 {
     internal class Program
     {
+        //Ceci est une version alternative de l'exo 1 séance 1 sequence 1.
+        //Elle introduit une manière différente de traiter les if / else.
+        //Elle n'est pas obligatoire et pas demandée, cet exemple sert surtout a montrer d'autres outils.
+
+
+        
         //Création de variables statiques
         static readonly double TAUX_REMISE_ROUGE = 0.5, TAUX_REMISE_VERT = 0.2;
 
