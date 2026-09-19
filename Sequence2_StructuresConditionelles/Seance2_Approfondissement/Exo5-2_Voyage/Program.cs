@@ -4,20 +4,21 @@ namespace Exo5_Voyage
 {
     internal class Program
     {
-        //Creation des valeurs statiques
+        //Creation de variables statiques
         static readonly decimal PLAZZA_SEM = 753m, PLAZZA_SUPP = 47m, RIVIERA_SEM = 784m, RIVIERA_SUPP = 44m;
         static readonly decimal PLAZZA_O = 29m, PLAZZA_L = 33m, RIVIERA_O = 27m, RIVIERA_L = 30m;
-
         static void Main(string[] args)
         {
-            //encodage en UTF8
+            //Cet exemple de code sert à utiliser d'autres outils comme vu dans d'autres exercice. On se sert d'un opérateur ternaire pour alléger le code et remplacer les else/if
+            //Il introduit aussi une suite de conditions pour vérifier que l'utilisateur ne rentre pas de mauvaises valeurs.
+
+            //Encodage UTF8
             Console.OutputEncoding = Encoding.UTF8;
 
             //Variables
             decimal prixHotel = 0m, prixVoiture = 0m, prixTotal = 0m;
 
             //QUESTIONS ----------------------------------------------------------------------------------------------------------------------------------
-
 
             //On poses nos questions et on vérifie si les réponses sont valides, sinon on affiche un message d'erreur et on quitte le programme
             //Si nbJour est bien un nombre et = ou supérieur à 7
@@ -79,50 +80,25 @@ namespace Exo5_Voyage
 
             //Une fois nos questions posées, on s'occupe du conditionnel
 
-            //Si l'hotel est le Plazza, on calcule le prix de l'hotel et de la voiture selon les conditions, sinon on fait pareil pour le Riviera
+            //Si l'hotel est le Plazza, on calcule le prix de l'hotel et de la voiture grace a des opérateurs ternaires, sinon on fait pareil pour le Riviera
+            //Rappel : une condition ternaire est une manière plus concise d'écrire un if/else. La syntaxe est la suivante : condition ? valeur_si_vrai : valeur_si_faux;
 
-            if (hotel  == "P")
+            if (hotel == "P")
             {
-                if (nbJour > 7)
-                {
-                    prixHotel = (nbJour - 7) * PLAZZA_SUPP + PLAZZA_SEM;
-                }
-                else
-                {
-                    prixHotel = PLAZZA_SEM;
-                }
+                prixHotel = (nbJour > 7) ? (nbJour - 7) * PLAZZA_SUPP + PLAZZA_SEM : PLAZZA_SEM;
+
                 if (vehicule == "O")
                 {
-                    if (typeVoiture == "O")
-                    {
-                        prixVoiture = (PLAZZA_O * jourVoiture);
-                    }
-                    else
-                    {
-                        prixVoiture = (PLAZZA_L * jourVoiture);
-                    }
+                    prixVoiture = (typeVoiture == "O") ? PLAZZA_O * jourVoiture : PLAZZA_L * jourVoiture;
                 }
             }
             else
             {
-                if (nbJour > 7)
-                {
-                    prixHotel = (nbJour - 7) * RIVIERA_SUPP + RIVIERA_SEM;
-                }
-                else
-                {
-                    prixHotel = RIVIERA_SEM;
-                }
+                prixHotel = (nbJour > 7) ? (nbJour - 7) * RIVIERA_SUPP + RIVIERA_SEM : RIVIERA_SEM;
+
                 if (vehicule == "O")
                 {
-                    if (typeVoiture == "O")
-                    {
-                        prixVoiture = (RIVIERA_O * jourVoiture);
-                    }
-                    else 
-                    {
-                        prixVoiture = (RIVIERA_L * jourVoiture);
-                    }
+                    prixVoiture = (typeVoiture == "O") ? RIVIERA_O * jourVoiture : RIVIERA_L * jourVoiture;
                 }
             }
 
