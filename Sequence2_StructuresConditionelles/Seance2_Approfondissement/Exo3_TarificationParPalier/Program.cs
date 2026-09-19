@@ -1,46 +1,50 @@
 ﻿using System.Text;
 
-namespace Exo2_TarificationAggressive
+namespace Exo3_TarificationPArPalier
 {
     internal class Program
     {
-        //Création des variables statiques
-        static readonly decimal QT_MOINS_10 = 149.99m, QT_10_49 = 134.99m, QT_PLUS_49 = 109.99m;
-        static readonly int PETITE_QUANTITE = 10, GRANDE_QUANTITE = 49;
+        //Meme exercice que le 2.
+        //Cependant je n'ai pas eu le temps de faire vérifier cet exercice par la prof. Donc prenez la suite avec des pincettes.
+        //Selon moi, c'est un problème de francais. Avant, on a demandé moins de 10, puis jusqu'a 49.
+        //Ici c'est jusqu'a 9, puis 40 de plus ! Donc 9, puis 49. Mais le prix est différent pour les 40 suivants, et pour les "autres"...
 
+        //Creation de vriables statiques
+        static readonly decimal PRIX_QT_9 = 149.99m, PRIX_QT_40 = 134.99m, PRIX_QT_AUTRES = 109.99m;
+        static readonly int QT_MINI = 9, QT_SUIVANTS = 40;
         static void Main(string[] args)
         {
-            //encodage en UTF8
+            //Ecnodage UTF8
             Console.OutputEncoding = Encoding.UTF8;
 
-            //Variables et attribution de valeurs
+            //Variables
             decimal prix = 0m;
             Console.WriteLine("Quantité ?");
             string input = (Console.ReadLine());
 
-            //Conditionnel rapide pour vérifier si l'entrée est un nombre valide et calculer le prix en fonction de la quantité
+            //Test rapide de la validité de l'input. Si c'est un nombre, on le convertit en int. Sinon, on affiche un message d'erreur.
+
             if (!int.TryParse(input, out int quantite) || quantite < 0)
             {
                 Console.WriteLine("Veuillez choisir un nombre valide");
                 return;
-                //return pour stopper l'exécution du programme
             }
 
-            //Conditionnel
-            else if (quantite < PETITE_QUANTITE)
+            //Conditionnel logique
+            else if (quantite <= QT_MINI)
             {
-                prix = quantite * QT_MOINS_10;
+                prix = quantite * PRIX_QT_9;
             }
-            else if (quantite <= GRANDE_QUANTITE)
+            else if (quantite <= (QT_SUIVANTS+QT_MINI))
             {
-                prix = quantite * QT_10_49;
+                prix = quantite * PRIX_QT_40;
             }
             else
             {
-                prix = quantite * QT_PLUS_49;
+                prix = quantite * PRIX_QT_AUTRES;
             }
 
-            //Afficher les réultats
+            //Afficher le resultat
             Console.WriteLine($"Le tarif est de {prix:C}.");
         }
     }
