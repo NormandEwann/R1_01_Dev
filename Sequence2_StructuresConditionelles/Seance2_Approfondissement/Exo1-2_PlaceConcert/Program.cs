@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace Exo1_PlaceConcert
+namespace Exo1-2_PlaceConcert
 {
     internal class Program
     {
