@@ -6,6 +6,9 @@ namespace Exo1_OperationsElementaires2
     {
         static void Main(string[] args)
         {
+            //Meme exercice, mais les tests se font avec cette fois ci des variables double plutot que int.
+
+            
             double val1 = 0, val2 = 0;
             Console.WriteLine("Valeure 1 :");
             val1 = double.Parse(Console.ReadLine());
