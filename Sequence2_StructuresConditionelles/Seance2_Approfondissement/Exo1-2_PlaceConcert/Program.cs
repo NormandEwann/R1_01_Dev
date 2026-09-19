@@ -1,65 +1,88 @@
 using System.Text;
 
-namespace Exo1_PlaceConcert
+namespace Exo1-2_PlaceConcert
 {
     internal class Program
     {
-        // Créations des variables statiques
+        //Créations des variables statiques
         static readonly double TARIF_ENFANT = 0, TARIF_ADO = 15, TARIF_ADULTE = 20;
         static readonly int AGE_ENFANT = 10, AGE_ADO = 20;
         static readonly double REDUC_PREVENTE = 1.5, TAUX_REDUC_ADHERENT = 0.2;
-
         static void Main(string[] args)
         {
-            // Encodage en UTF8 pour l'affichage correct du symbole €
+            //Ce code est une version plus poussé que ce qu'on demande. Il permet de vérifier si l'utilisateur entre des valeurs correctes, et ceux "en direct".
+            //Il sert donc surtout d'exemple avancé pour une certaine érgonomie de l'utilisateur, mais n'est pas nécessaire pour la base de l'exercice.
+            //Voir exo1_PlaceConcert pour la version demandée en cours
+            //Encodage en UTF8
             Console.OutputEncoding = Encoding.UTF8;
 
+            //Déclaration des variables
             double prix = 0;
 
-            // Saisie de l'âge (supposé valide)
             Console.WriteLine("Age du spectateur :");
-            int age = int.Parse(Console.ReadLine());
+            string input = (Console.ReadLine());
 
-            // Lecture de la catégorie d'âge et détermination du tarif de base
-            if (age < AGE_ENFANT)
+            //On verifie que l'utilisateur entre bien un nombre, et que ce nombre est positif. Si ce n'est pas le cas, on quitte le programme avec un message d'erreur.
+            if (!int.TryParse(input, out int age) || age < 0)
+            {
+                Console.WriteLine("Veuillez choisir un nombre valide");
+                return;
+            }
+
+            //On met aussi une vérification pour les enfants, qui sont gratuits. Si l'utilisateur entre un âge inférieur à 10 ans, on lui indique que c'est gratuit. 
+            //Pas besoin de continuer la suite car les calculs ne seront pas nécessaires.
+            else if (age < AGE_ENFANT)
             {
                 prix = TARIF_ENFANT;
             }
-            else if (age < AGE_ADO)
-            {
-                prix = TARIF_ADO;
-            }
+
+            //Si les conditions précédentes ne sont pas remplies, on continue le programme pour calculer le prix en fonction de l'âge, de l'adhésion et de la prévente.
             else
             {
-                prix = TARIF_ADULTE;
-            }
-
-            // Pour les enfants, le tarif est de 0€, pas besoin de demander les réductions
-            if (age >= AGE_ENFANT)
-            {
-                Console.WriteLine("Adhérent (O/N) :");
+                Console.WriteLine("Adhérent ?");
                 string adherent = Console.ReadLine();
 
-                Console.WriteLine("Prévente (O/N) :");
+                //On vérifie que l'utilisateur entre bien O ou N pour adhérent. Si ce n'est pas le cas, on quitte le programme avec un message d'erreur.
+                if (adherent != "O" && adherent != "N")
+                {
+                    Console.WriteLine("Erreur : Type invalide, veuillez entrer O ou N");
+                    return;
+                }
+
+                Console.WriteLine("Prévente ?");
                 string prevente = Console.ReadLine();
 
-                // Application de la réduction adhérent
-                if (adherent == "O")
+                //de meme, on vérifie que l'utilisateur entre bien O ou N pour prévente. Si ce n'est pas le cas, on quitte le programme avec un message d'erreur.
+                if (prevente != "O" && prevente != "N")
                 {
-                    prix = prix - (prix * TAUX_REDUC_ADHERENT);
+                    Console.WriteLine("Erreur : Jour invalide, veuillez entrer O ou N");
+                    return;
                 }
 
-                // Application de la réduction prévente
-                if (prevente == "O")
+                //Conditionnel pour déterminer le prix en fonction de l'âge, de l'adhésion et de la prévente.
+                if (age < AGE_ADO)
                 {
-                    prix = prix - REDUC_PREVENTE;
+                    prix = TARIF_ADO; 
                 }
+                else
+                {
+                    prix = TARIF_ADULTE;
+                }
+
+                //Si adherent est O, on devra appliquer la réduction pour les adhérents. 
+                //On se sert ensuite d'une condition ternaire pour appliquer la réduction pour la prévente si l'utilisateur est adhérent, ou juste la réduction pour les adhérents si l'utilisateur n'est pas en prévente.
+                //Rappel : une condition ternaire est une manière plus concise d'écrire un if/else. La syntaxe est la suivante : condition ? valeur_si_vrai : valeur_si_faux;
+
+                if (adherent == "O")
+                    prix = (prevente == "O") ? prix - (prix * TAUX_REDUC_ADHERENT) - REDUC_PREVENTE : prix - (prix * TAUX_REDUC_ADHERENT);
+                else
+                    prix = (prevente == "O") ? prix - REDUC_PREVENTE : prix;
             }
 
-            // Affichage du résultat
-            // Le formatage {prix:C} permet d'afficher le prix avec le symbole monétaire correspondant à la culture de l'utilisateur.
-            // Exemple : 20,00 € pour la France, $20.00 pour les États-Unis, etc.
-            // Il faut mettre $ devant le string pour pouvoir utiliser l'interpolation de string, et la variable entre des accolades pour qu'elle soit évaluée et affichée dans le string.
+            //Affichage des résultats. Le formatage {prix:C} permet d'afficher le prix avec le symbole monétaire correspondant à la culture de l'utilisateur.
+            //Exemple : 20,00 € pour la France, $20.00 pour les États-Unis, etc.
+            //Il faut mettre $ devant le string pour pouvoir utiliser l'interpolation de string, et la variable entre des accolades pour qu'elle soit évaluée et affichée dans le string.
+            
             Console.WriteLine($"La place coutera à la personne {prix:C}.");
         }
     }
